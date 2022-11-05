@@ -14,7 +14,8 @@ def buildService(service) {
 
             echo "Starting to build $service"
 
-            sh 'pwd'
+            sh "pwd"
+            sh "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
 
             sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
 
