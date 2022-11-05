@@ -20,7 +20,7 @@ def buildService(service) {
             sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
 
             echo "Archiving EFP War File..."
-            sh "mv target/ABCD.war target/efp.war"
+            sh "mv target/ABCtechnologies-1.0.war target/efp.war"
 
             def efp_war = "${warPath["$service"]}"
 
