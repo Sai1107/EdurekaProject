@@ -16,7 +16,7 @@ def buildService(service) {
 
             sh 'pwd'
 
-            sh "mvn clean package test"
+            sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
 
             echo "Archiving EFP War File..."
             sh "mv target/ABCD.war target/efp.war"
