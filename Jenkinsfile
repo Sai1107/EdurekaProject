@@ -44,9 +44,9 @@ node('test_build') {
     
     try {
         stage('Checkout') {
-            buildName "#${currentBuild.number} | ${branchName}:$services"
+            buildName "#${currentBuild.number} | main:$services"
             
-            git url: 'git@github.com:ajayryeruva/maven_test.git', branch: "${branchName}", changelog: true
+            git url: 'git@github.com:ajayryeruva/maven_test.git', branch: "main", changelog: true
             echo "service selected: $services"
                 
         }
