@@ -28,15 +28,33 @@ def buildService(service) {
                 sh "docker login -u ${username} -p ${password}"
 
                 src_dir = sh(script: "pwd", returnStdout: true).trim()
+
                 ansiblePlaybook(
-                    playbook: "./create_push_image_regapp.yml",
+                    playbook: "./ansible/create_push_image_regapp.yml",
                     // inventory: "./.hosts",
                     extras: "--extra-vars src_dir=${src_dir}",
                     forks: 6,
                     colorized: true,
                     hostKeyChecking: false
-
                 )
+
+                // ansiblePlaybook(
+                //     playbook: "./ansible/K8S-efp-Deployment.yml",
+                //     // inventory: "./.hosts",
+                //     extras: "--extra-vars src_dir=${src_dir}",
+                //     forks: 6,
+                //     colorized: true,
+                //     hostKeyChecking: false
+                // )
+
+                // ansiblePlaybook(
+                //     playbook: "./ansible/K8S-efp-Service.yml",
+                //     // inventory: "./.hosts",
+                //     extras: "--extra-vars src_dir=${src_dir}",
+                //     forks: 6,
+                //     colorized: true,
+                //     hostKeyChecking: false
+                // )
 
             }
 
@@ -91,9 +109,9 @@ node('test_build') {
     
     
     try {
-        stage('Build') {
+        stage('Build And Deploy') {
             if (!isSuccess) {
-                Utils.markStageSkippedForConditional('Build')
+                Utils.markStageSkippedForConditional('Build And Deploy')
             }
             else {
                 
