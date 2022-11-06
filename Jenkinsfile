@@ -30,7 +30,7 @@ def buildService(service) {
                 src_dir = sh(script: "pwd", returnStdout: true).trim()
 
                 ansiblePlaybook(
-                    playbook: "./ansible/create_push_image_regapp.yml",
+                    playbook: "./create_push_image_regapp.yml",
                     // inventory: "./.hosts",
                     extras: "--extra-vars src_dir=${src_dir}",
                     forks: 6,
