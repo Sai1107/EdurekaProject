@@ -35,9 +35,9 @@ def buildService(service) {
                     // inventory: "./.hosts",
                     extras: "--extra-vars src_dir=${src_dir}",
                     forks: 6,
-                    colorized: true
+                    colorized: true,
                     hostKeyChecking: false
-                    
+
                 )
 
             }
