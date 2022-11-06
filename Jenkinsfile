@@ -23,6 +23,23 @@ def buildService(service) {
 
             archiveArtifacts fingerprint: true, onlyIfSuccessful: true,  artifacts: '' + efp_war
 
+
+            withCredentials([usernamePassword(credentialsId: 'docker-login-creds', passwordVariable: 'password', usernameVariable: 'username')]){
+                sh '''
+                echo "${password} | docker login -u ${username} --password-stdin"
+                '''
+
+                src_dir = sh(script: "pwd", returnStdout: true).trim()
+                ansiblePlaybook(
+                    playbook: "./create_push_image_regapp.yml",
+                    inventory: "./.hosts",
+                    extras: "--extra-vars src_dir=${src_dir}",
+                    forks: 6,
+                    colorized: true
+                )
+
+            }
+
             break;
 
         default:
@@ -53,6 +70,26 @@ node('test_build') {
         currentBuild.result = 'FAILURE'
     }
     
+
+    // try {
+    //     stage('Login to Docker Hub') {
+
+    //         if (!isSuccess) {
+    //             Utils.markStageSkippedForConditional('Login to Docker Hub')
+    //         }
+    //         else {
+    //             steps{                       	
+    //                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+    //                 echo 'Login Completed'      
+    //             }
+    //         }
+    //     }
+    // } catch (e) {
+    //     isSuccess = false
+    //     currentBuild.result = 'FAILURE'
+    // }
+    
+    
     try {
         stage('Build') {
             if (!isSuccess) {
@@ -62,13 +99,13 @@ node('test_build') {
                 
                 for (service in result) {
 
-                buildService(service)
+                    buildService(service)
 
                 } 
-            
             }
         }
-    } catch (e) {
+    } 
+    catch (e) {
         isSuccess = false
         currentBuild.result = 'FAILURE'
     }
