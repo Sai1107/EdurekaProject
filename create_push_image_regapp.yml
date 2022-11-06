@@ -4,7 +4,7 @@
 
   tasks:
   - name: create docker image
-    command: docker build -t regapp:latest -f ../Dockerfile
+    command: docker build -t regapp:latest .
 
   - name: create tag to push image onto dockerhub
     command: docker tag regapp:latest ajayyeruva18/regapp:latest
