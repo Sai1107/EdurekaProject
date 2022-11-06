@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: efp-service
+  labels:
+    app: efp-devops-project
+spec:
+  selector:
+    app: efp-devops-project
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 31200
