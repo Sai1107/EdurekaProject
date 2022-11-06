@@ -32,10 +32,12 @@ def buildService(service) {
                 src_dir = sh(script: "pwd", returnStdout: true).trim()
                 ansiblePlaybook(
                     playbook: "./create_push_image_regapp.yml",
-                    inventory: "./.hosts",
+                    // inventory: "./.hosts",
                     extras: "--extra-vars src_dir=${src_dir}",
                     forks: 6,
                     colorized: true
+                    hostKeyChecking: false
+                    
                 )
 
             }
