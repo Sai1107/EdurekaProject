@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  prometheus-deployment
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      name: prometheus-deployment
+      labels:
+        app: prometheus
+    spec:
+      volumes:
+        - name: prometheus-data-store
+          persistentVolumeClaim:
+            claimName: prometheus-pvc
+        - name: prometheus-config
+          configMap:
+            name: prometheus-configmap
+      containers:
+      - name:  prometheus
+        image:  prom/prometheus
+        args:
+        - '--config.file=/prometheus.yml'
+        - --storage.tsdb.path='prometheus_data/
+        ports:
+        - containerPort:  9090
+        volumeMounts:
+        - name: prometheus-data-store
+          mountPath: prometheus_data/
+        - name: prometheus-config
+          mountPath: /prometheus.yml
+          subPath: prometheus.yml
