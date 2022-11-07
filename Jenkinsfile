@@ -75,7 +75,7 @@ node('test_build') {
         stage('Checkout') {
             // buildName "#${currentBuild.number} | main:efp"
             
-            git url: 'https://github.com/ajayryeruva/maven_test.git', branch: "main", changelog: true
+            git url: 'https://github.com/ajayryeruva/edureka_final_project.git', branch: "main", changelog: true
             echo "service selected: efp"
                 
         }
