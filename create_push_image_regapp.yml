@@ -1,6 +1,7 @@
 #!/usr/bin/ansible-playbook
 ---
 - hosts: localhost
+  become: true
 
   tasks:
   - name: create docker image
