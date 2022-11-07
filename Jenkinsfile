@@ -13,8 +13,6 @@ def buildService(service) {
 
             sh "pwd"
             sh "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
-            sh "id"
-            // sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
             sh "/opt/maven/bin/mvn clean package test"
 
             def efp_war = "${warPath["$service"]}"
@@ -83,25 +81,6 @@ node('build_and_deploy') {
         isSuccess = false
         currentBuild.result = 'FAILURE'
     }
-    
-
-    // try {
-    //     stage('Login to Docker Hub') {
-
-    //         if (!isSuccess) {
-    //             Utils.markStageSkippedForConditional('Login to Docker Hub')
-    //         }
-    //         else {
-    //             steps{                       	
-    //                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
-    //                 echo 'Login Completed'      
-    //             }
-    //         }
-    //     }
-    // } catch (e) {
-    //     isSuccess = false
-    //     currentBuild.result = 'FAILURE'
-    // }
     
     
     try {
