@@ -14,7 +14,8 @@ def buildService(service) {
 
             sh "pwd"
             sh "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
-            sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
+            // sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
+            sh "/opt/maven/bin/mvn clean package test"
 
             echo "Archiving EFP War File..."
             sh "mv target/ABCtechnologies-1.0.war target/efp.war"
