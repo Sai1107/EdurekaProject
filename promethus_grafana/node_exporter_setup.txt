@@ -1,0 +1,31 @@
+cd /home/edureka
+wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
+tar -xf node_exporter-1.2.2.linux-amd64.tar.gz
+mv node_exporter-1.2.2.linux-amd64/ node_exporter/
+chown -R edureka:root node_exporter/
+mv node_exporter/node_exporter /usr/local/bin/
+vim /usr/lib/systemd/system/node_exporter.service
+
+*****************
+[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+User=edureka
+Group=root
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+*****************
+
+chown -R edureka:root /usr/lib/systemd/system/
+systemctl daemon-reload
+systemctl enable/start node_exporter
+
+journalctl -u node_exporter
+
+telnet localhost 9100
+
