@@ -62,7 +62,7 @@ def buildService(service) {
     }
 }
 
-node('test_build') {
+node('build_and_deploy') {
 
     def isSuccess = true
 
