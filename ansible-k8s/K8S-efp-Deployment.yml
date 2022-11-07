@@ -1,12 +1,12 @@
 ---
 - name: Create pods using deployment 
-  hosts: kubernetes 
+  hosts: localhost
   # become: true
-  user: ubuntu
+  # user: ubuntu
  
   tasks: 
   - name: create a deployment
-    command: kubectl apply -f efp-deploy.yml
+    command: sudo kubectl apply -f efp-deploy.yml
  
   - name: update deployment with new pods if image updated in docker hub
-    command: kubectl rollout restart deployment.v1.apps/efp-deployment
+    command: sudo kubectl rollout restart deployment.v1.apps/efp-deployment

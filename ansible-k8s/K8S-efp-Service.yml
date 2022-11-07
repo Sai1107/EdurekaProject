@@ -1,10 +1,10 @@
 ---
 - name: create service for deployment
-  hosts: kubernetes
+  hosts: localhost
   # become: true
-  user: ubuntu
+  # user: ubuntu
 
   tasks:
   - name: create a service
-    command: kubectl apply -f efp-service.yml
+    command: sudo kubectl apply -f efp-service.yml
 

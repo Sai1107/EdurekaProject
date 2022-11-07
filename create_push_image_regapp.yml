@@ -4,10 +4,10 @@
 
   tasks:
   - name: create docker image
-    command: docker build -t regapp:latest .
+    command: sudo docker build -t regapp:latest .
 
   - name: create tag to push image onto dockerhub
-    command: docker tag regapp:latest ajayyeruva18/regapp:latest
+    command: sudo docker tag regapp:latest ajayyeruva18/regapp:latest
 
   - name: push docker image
-    command: docker push ajayyeruva18/regapp:latest
+    command: sudo docker push ajayyeruva18/regapp:latest
