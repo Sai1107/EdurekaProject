@@ -14,6 +14,7 @@ def buildService(service) {
 
             sh "pwd"
             sh "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
+            sh "id"
             // sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
             sh "/opt/maven/bin/mvn clean package test"
 
@@ -29,6 +30,14 @@ def buildService(service) {
 
                 ansiblePlaybook(
                     playbook: "./create_push_image_regapp.yml",
+                    extras: "--extra-vars src_dir=${src_dir}",
+                    forks: 6,
+                    colorized: true,
+                    hostKeyChecking: false
+                )
+
+                ansiblePlaybook(
+                    playbook: "./ansible/K8S-efp-Deployment.yml",
                     // inventory: "./.hosts",
                     extras: "--extra-vars src_dir=${src_dir}",
                     forks: 6,
@@ -36,23 +45,14 @@ def buildService(service) {
                     hostKeyChecking: false
                 )
 
-                // ansiblePlaybook(
-                //     playbook: "./ansible/K8S-efp-Deployment.yml",
-                //     // inventory: "./.hosts",
-                //     extras: "--extra-vars src_dir=${src_dir}",
-                //     forks: 6,
-                //     colorized: true,
-                //     hostKeyChecking: false
-                // )
-
-                // ansiblePlaybook(
-                //     playbook: "./ansible/K8S-efp-Service.yml",
-                //     // inventory: "./.hosts",
-                //     extras: "--extra-vars src_dir=${src_dir}",
-                //     forks: 6,
-                //     colorized: true,
-                //     hostKeyChecking: false
-                // )
+                ansiblePlaybook(
+                    playbook: "./ansible/K8S-efp-Service.yml",
+                    // inventory: "./.hosts",
+                    extras: "--extra-vars src_dir=${src_dir}",
+                    forks: 6,
+                    colorized: true,
+                    hostKeyChecking: false
+                )
 
             }
 
