@@ -115,12 +115,11 @@ node('test_build') {
             }
             else {
 
-                    buildService("efp")
+                buildService("efp")
 
                 } 
             }
-        }
-    } 
+    }
     catch (e) {
         isSuccess = false
         currentBuild.result = 'FAILURE'
