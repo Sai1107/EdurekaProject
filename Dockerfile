@@ -5,6 +5,6 @@ From tomcat:latest
 MAINTAINER "Ajay Reddy Yeruva" 
 
 # copy war file on to container 
-COPY ./target/efp.war /usr/local/tomcat/webapps
+COPY ./target/ABCtechnologies-1.0.war /usr/local/tomcat/webapps/
 
 

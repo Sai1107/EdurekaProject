@@ -2,7 +2,7 @@
 
 //variables
 List < String > result = Arrays.asList(services.split("\\s*,\\s*"));
-warPath                = ["efp": "target/efp.war"]
+warPath                = ["efp": "target/ABCtechnologies-1.0.war"]
 
 def buildService(service) {
 
@@ -16,9 +16,6 @@ def buildService(service) {
             sh "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
             // sh "/opt/apache-maven-3.8.6/bin/mvn clean package test"
             sh "/opt/maven/bin/mvn clean package test"
-
-            echo "Archiving EFP War File..."
-            sh "mv target/ABCtechnologies-1.0.war target/efp.war"
 
             def efp_war = "${warPath["$service"]}"
 
