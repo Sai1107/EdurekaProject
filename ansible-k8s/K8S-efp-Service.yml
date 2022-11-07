@@ -1,10 +1,8 @@
 ---
 - name: create service for deployment
   hosts: localhost
-  become: true
-  user: edureka
-
   tasks:
   - name: create a service
     command: kubectl apply -f efp-service.yml
-
+    become: yes
+    become_user: edureka
