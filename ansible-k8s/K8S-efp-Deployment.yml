@@ -1,8 +1,8 @@
 ---
 - name: Create pods using deployment 
   hosts: localhost
-  become: false
-  # user: ubuntu
+  become: true
+  user: edureka
  
   tasks: 
   - name: create a deployment
