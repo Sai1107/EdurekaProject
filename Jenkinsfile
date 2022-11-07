@@ -77,10 +77,10 @@ node('test_build') {
     
     try {
         stage('Checkout') {
-            buildName "#${currentBuild.number} | main:$services"
+            buildName "#${currentBuild.number} | main:efp"
             
             git url: 'git@github.com:ajayryeruva/maven_test.git', branch: "main", changelog: true
-            echo "service selected: $services"
+            echo "service selected: efp"
                 
         }
     } catch (e) {
@@ -114,10 +114,8 @@ node('test_build') {
                 Utils.markStageSkippedForConditional('Build And Deploy')
             }
             else {
-                
-                for (service in result) {
 
-                    buildService(service)
+                    buildService("efp")
 
                 } 
             }
