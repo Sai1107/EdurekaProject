@@ -1,7 +1,6 @@
 #!groovy
 
 //variables
-List < String > result = Arrays.asList(services.split("\\s*,\\s*"));
 warPath                = ["efp": "target/ABCtechnologies-1.0.war"]
 
 def buildService(service) {
