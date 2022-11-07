@@ -4,5 +4,4 @@
   tasks:
   - name: create a service
     command: kubectl apply -f efp-service.yml
-    become: yes
-    become_user: edureka
+
