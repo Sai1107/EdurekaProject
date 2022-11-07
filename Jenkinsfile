@@ -29,29 +29,28 @@ def buildService(service) {
 
                 ansiblePlaybook(
                     playbook: "./create_push_image_regapp.yml",
-                    extras: "--extra-vars src_dir=${src_dir}",
                     forks: 6,
                     colorized: true,
                     hostKeyChecking: false
                 )
 
-                ansiblePlaybook(
-                    playbook: "./ansible-k8s/K8S-efp-Deployment.yml",
-                    // inventory: "./.hosts",
-                    extras: "--extra-vars src_dir=${src_dir}",
-                    forks: 6,
-                    colorized: true,
-                    hostKeyChecking: false
-                )
+                withEnv(["KUBECONFIG=/var/lib/jenkins/.kube/admin.conf"]) {
+                    ansiblePlaybook(
+                        playbook: "./ansible-k8s/K8S-efp-Deployment.yml",
+                        forks: 6,
+                        colorized: true,
+                        hostKeyChecking: false
+                    )
+                }
 
-                ansiblePlaybook(
-                    playbook: "./ansible-k8s/K8S-efp-Service.yml",
-                    // inventory: "./.hosts",
-                    extras: "--extra-vars src_dir=${src_dir}",
-                    forks: 6,
-                    colorized: true,
-                    hostKeyChecking: false
-                )
+                withEnv(["KUBECONFIG=/var/lib/jenkins/.kube/admin.conf"]) {
+                    ansiblePlaybook(
+                        playbook: "./ansible-k8s/K8S-efp-Service.yml",
+                        forks: 6,
+                        colorized: true,
+                        hostKeyChecking: false
+                    )
+                }
 
             }
 
