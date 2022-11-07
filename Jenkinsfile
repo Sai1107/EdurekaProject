@@ -71,7 +71,6 @@ node('build_and_deploy') {
     
     try {
         stage('Checkout') {
-            // buildName "#${currentBuild.number} | main:efp"
             
             git url: 'https://github.com/ajayryeruva/edureka_final_project.git', branch: "main", changelog: true
             echo "service selected: efp"
