@@ -72,7 +72,7 @@ node('build_and_deploy') {
     try {
         stage('Checkout') {
             
-            git url: 'https://github.com/ajayryeruva/edureka_final_project.git', branch: "main", changelog: true
+            git url: 'https://github.com/Sai1107/EdurekaProject.git', branch: "main", changelog: true
             echo "service selected: efp"
                 
         }
