@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: efp-devops-project
-        image: ajayyeruva18/regapp:latest
+        image: sai1107/regapp:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
